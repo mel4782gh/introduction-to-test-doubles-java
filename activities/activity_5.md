@@ -7,7 +7,7 @@
 Firstly, let's remind ourselves what a Spy is.
 
 - Can you remember what a Spy means?
-
+we
 <details>
 <summary>Click here to see the answer</summary>
 <pre>

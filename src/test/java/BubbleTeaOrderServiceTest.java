@@ -4,10 +4,14 @@ import com.techreturners.bubbleteaordersystem.service.BubbleTeaOrderService;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EnumSource;
+import org.junit.runner.RunWith;
 import testhelper.DummySimpleLogger;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
+
 
 public class BubbleTeaOrderServiceTest {
 
@@ -33,6 +37,7 @@ public class BubbleTeaOrderServiceTest {
         BubbleTea bubbleTea = new BubbleTea(BubbleTeaTypeEnum.OolongMilkTea, 4.5);
         BubbleTeaRequest bubbleTeaRequest = new BubbleTeaRequest(paymentDetails, bubbleTea);
 
+        //the expected result
         BubbleTeaOrderRequest expectedResult = new BubbleTeaOrderRequest(
                 "hello kitty",
                 "sanrio puroland",
@@ -53,5 +58,6 @@ public class BubbleTeaOrderServiceTest {
         verify(mockMessenger).sendBubbleTeaOrderRequestEmail(result);
         verify(mockMessenger, times(1)).sendBubbleTeaOrderRequestEmail(result);
     }
+
 
 }
