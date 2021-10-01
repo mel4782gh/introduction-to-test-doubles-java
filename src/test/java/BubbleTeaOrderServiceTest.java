@@ -59,5 +59,32 @@ public class BubbleTeaOrderServiceTest {
         verify(mockMessenger, times(1)).sendBubbleTeaOrderRequestEmail(result);
     }
 
+    //Extension exercise create a parameterized test to create multiple BubbleTeaOrderRequests
+    @ParameterizedTest
+    @EnumSource(BubbleTeaTypeEnum.class)
+    // passing all 5 tea types with parameterized test to create multiple BubbleTeaOrderRequests
+    void createBubbleTeaOrderRequestsUsingBubbleTeaTypeEnumParameter(BubbleTeaTypeEnum teaenum) {
+
+        BubbleTea tea = new BubbleTea(teaenum, 2.50);
+        BubbleTeaRequest bubbleTeaRequest = new BubbleTeaRequest(paymentDetails, tea);
+
+        //the expected result with parameter for enum
+        BubbleTeaOrderRequest expectedResult = new BubbleTeaOrderRequest(
+                "hello kitty",
+                "sanrio puroland",
+                "0123456789",
+                teaenum
+        );
+
+        //Act
+        BubbleTeaOrderRequest result = bubbleTeaOrderService.createOrderRequest(bubbleTeaRequest);
+
+        //Assert
+        assertEquals(expectedResult.getName(), result.getName());
+        assertEquals(expectedResult.getAddress(), result.getAddress());
+        assertEquals(expectedResult.getDebitCardDigits(), result.getDebitCardDigits());
+        assertEquals(expectedResult.getBubbleTeaType(), result.getBubbleTeaType());
+    }
+
 
 }
